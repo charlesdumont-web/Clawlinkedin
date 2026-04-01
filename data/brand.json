@@ -1,21 +1,54 @@
 {
   "name": "",
   "role": "",
-  "company": "",
-  "tagline": "",
-  "target_audience": "Dirigeants de PME et équipes commerciales qui veulent automatiser avec l'IA sans se brûler",
+  "company": "Synchro IA",
+  "website": "synchroia.com",
+  "location": "Brossard, QC — Fièrement québécoise",
+  "email": "info@synchroia.com",
+  "tagline": "Synchroniser l'intelligence humaine et artificielle",
+  "company_description": "Agence d'intégration IA québécoise. On aide les PME à remettre de la cohérence dans leur quotidien en synchronisant leurs gens, leurs processus et leurs technologies. On ne vend pas un outil de plus — on intègre des solutions sur mesure. Déploiement en ~6 semaines. On s'intègre à ce que le client utilise déjà, sans tout recommencer.",
+  "target_audience": "Dirigeants de PME québécoises qui veulent adopter l'IA mais n'ont pas le temps de se perdre dans le jargon techno. Équipes commerciales et opérationnelles qui souffrent de systèmes déconnectés, de tâches manuelles répétitives et d'un manque de visibilité.",
   "values": [
-    "pragmatisme",
-    "rigueur",
-    "résultats concrets",
-    "pas de bullshit"
+    "Flexibilité — on adapte nos solutions à leur réalité, pas l'inverse",
+    "Efficacité — résultats mesurables dès les premières semaines",
+    "Proximité — agence québécoise, on comprend les défis des PME d'ici",
+    "Ambition collective — leur succès est notre succès"
   ],
   "content_pillars": [
-    "IA pour les ventes et le CRM",
-    "automatisation des processus",
-    "téléphonie et SMS IA",
-    "erreurs à éviter en déploiement IA",
-    "conformité et bonnes pratiques"
+    "Automatisation & communication (centraliser les canaux, uniformiser les réponses, traçabilité)",
+    "Prospection & ventes IA (pipeline structuré, relances auto, scoring, prévisions)",
+    "Gestion & facturation (flux admin, synchronisation financière, visibilité en temps réel)",
+    "Opérations & productivité (outils qui se parlent, équipes déchargées du manuel)",
+    "Intelligence d'affaires (tableaux de bord, données consolidées, décisions appuyées)",
+    "Intégration IA avancée (modèles sur mesure, agents intelligents, systèmes propriétaires)"
+  ],
+  "method": {
+    "steps": [
+      "01 — Découverte & diagnostic : comprendre la réalité, identifier les frictions, définir des objectifs mesurables",
+      "02 — Prototype & pilote : tester avant de déployer, valider avec les équipes sur des cas réels",
+      "03 — Déploiement complet : intégration, formation, documentation, support",
+      "04 — Suivi & évolution : monitoring, optimisations continues, mises à jour"
+    ],
+    "key_message": "Pas de formule magique. Pas de promesses irréalistes. Une méthode éprouvée."
+  },
+  "key_stats": {
+    "deployment_time": "~6 semaines",
+    "time_saved_weekly": "3h / semaine",
+    "time_saved_yearly": "156h / année",
+    "annual_savings": "31 000 $"
+  },
+  "tech_partners": [
+    "HubSpot", "Pipedrive", "Salesforce", "Zoho", "Twilio",
+    "Make", "Zapier", "Notion", "Slack", "Monday.com",
+    "QuickBooks", "Supabase", "OpenAI", "Anthropic",
+    "Microsoft 365", "Google Workspace", "AWS"
+  ],
+  "key_differentiators": [
+    "On ne vend pas des outils, on intègre des solutions",
+    "On parle affaires, pas jargon technique",
+    "Fièrement québécois — on comprend les PME d'ici",
+    "L'IA doit servir vos objectifs d'affaires, pas l'inverse",
+    "On s'intègre à ce que vous utilisez déjà, sans tout recommencer"
   ],
   "style": {
     "tone": "expert tranchant et direct — pas de fluff, pas de jargon vide",
@@ -31,42 +64,34 @@
       "X, ce n'est pas 'Y'.",
       "X, ce n'est pas Y. C'est Z.",
       "Avant X : une source de vérité.",
-      "Le problème que tout le monde ignore avec X."
+      "Le problème que tout le monde ignore avec X.",
+      "Ce que les PME d'ici sous-estiment avec l'IA."
     ],
     "cta_phrases": [
       "Écris 'MOT-CLÉ' en DM. Je t'envoie [la ressource].",
       "Si tu veux déployer propre en 30 jours, écris-nous.",
-      "Écris-nous si tu veux [bénéfice concret]."
+      "Écris-nous si tu veux [bénéfice concret].",
+      "synchroia.com — ou écris-nous directement."
     ],
     "vocabulary_to_use": [
-      "courriels",
-      "gabarits",
-      "dépend",
-      "propre",
-      "scaler",
-      "se brûler",
-      "point non négociable",
-      "source de vérité",
-      "takeover",
-      "tagger",
-      "closer",
-      "back-and-forth"
+      "courriels", "gabarits", "dépend", "propre", "scaler",
+      "se brûler", "point non négociable", "source de vérité",
+      "takeover", "tagger", "closer", "back-and-forth",
+      "en synchro", "PME d'ici", "sur mesure", "mesurable",
+      "traçable", "pipeline", "scoring", "friction", "déployer"
     ],
     "vocabulary_to_avoid": [
-      "révolutionnaire",
-      "game-changer",
-      "disruptif",
-      "synergies",
-      "paradigme",
-      "passionné",
-      "je suis ravi de"
+      "révolutionnaire", "game-changer", "disruptif", "synergies",
+      "paradigme", "passionné", "je suis ravi de", "solution innovante",
+      "transformation digitale", "IA générative"
     ],
-    "structural_pattern": "Accroche reframe (2-3 lignes) → liste de constats courts → sections numérotées avec exemples → point non-évident → CTA court"
+    "structural_pattern": "Accroche reframe (2-3 lignes) → liste de constats courts → sections numérotées avec exemples concrets → point non-évident que les gens sous-estiment → CTA court avec mot-clé DM"
   },
   "hashtags": [],
   "topics_to_avoid": [
     "politique",
-    "sujets personnels non liés aux affaires"
+    "sujets personnels non liés aux affaires",
+    "promesses IA génériques sans résultats concrets"
   ],
   "post_examples": [
     "Un Téléphoniste IA (+SMS) , ce n'est pas \"un robot qui parle\".\n\nC'est un système de relance.\n\nEt ça touche 3 zones sensibles :\n\nVentes.\nExpérience client.\nConformité.\n\nDonc si c'est mal fait, tu ne \"scales\" pas.\nTu te brûles.\n\n\nVoici ce que ça fait quand c'est bien fait.\n\n1) Ça enlève la friction\n\nLe SMS sert à :\n\nConfirmer.\nQualifier.\nPlanifier.\nRappeler.\n\nPas à \"closer\".\n\nExemples simples :\n\n• \"Tu veux qu'on t'appelle quand?\"\n• \"C'est pour quel montant / quel besoin?\"\n• \"Tu es dispo aujourd'hui ou demain?\"\n\nÇa coupe 80% du back-and-forth.\n\n2) Ça crée de la constance\n\nL'IA ne se fatigue pas.\nElle fait le follow-up.\n\n1er contact.\nRelance 2.\nRelance 3.\nDernier essai.\n\nAvec des délais.\n\n24h.\n48h.\n72h.\n\nEt surtout : des limites.\nSinon ça devient du spam.\n\n3) Ça qualifie avant de passer à un humain\n\nL'objectif n'est pas de remplacer ton équipe.\n\nL'objectif est de lui donner :\n\n• le bon lead\n• au bon moment\n• avec le contexte\n\nQui est la personne.\nPourquoi elle a écrit.\nQu'est-ce qu'elle a répondu.\nQu'est-ce qu'on propose ensuite.\n\n4) Ça doit être \"reprenable\"\n\nLe point non négociable :\nTakeover humain instantané.\n\nSi le prospect dit :\n\n• \"OK, je veux parler à quelqu'un\"\n• \"J'ai une situation spéciale\"\n• \"Je suis fâché\"\n• \"Je ne comprends pas\"\n\nL'IA doit :\n\nS'arrêter.\nTagger.\nTransférer.\nEt documenter.\n\n5) Ça doit laisser une trace\n\nSinon tu n'as pas un système.\nTu as un risque.\n\nCe qu'il faut pouvoir voir dans le CRM :\n\n• tous les SMS\n• tous les appels\n• statut du lead\n• raison du statut\n• prochaine action\n• opt-out / consentement\n\nCe que les gens sous-estiment\nLe plus dur, ce n'est pas la voix.\n\nC'est :\n\nLes règles d'escalade.\nLa déduplication.\nLa gestion des exceptions.\nLa conformité.\nLe monitoring.\n\n\nSi tu veux déployer \"propre\" en 30 jours, écris-nous.\nhttps://lnkd.in/eYsdHjDS",

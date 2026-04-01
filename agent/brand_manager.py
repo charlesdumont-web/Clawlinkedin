@@ -50,9 +50,15 @@ def get_brand_context_for_prompt(profile: dict) -> str:
     if profile.get("role"):
         identity_parts.append(f"Rôle : {profile['role']}")
     if profile.get("company"):
-        identity_parts.append(f"Entreprise/Secteur : {profile['company']}")
+        identity_parts.append(f"Entreprise : {profile['company']}")
+    if profile.get("website"):
+        identity_parts.append(f"Site web : {profile['website']}")
+    if profile.get("location"):
+        identity_parts.append(f"Localisation : {profile['location']}")
     if profile.get("tagline"):
         identity_parts.append(f"Tagline : {profile['tagline']}")
+    if profile.get("company_description"):
+        identity_parts.append(f"Description : {profile['company_description']}")
     if identity_parts:
         sections.append("## Identité professionnelle\n" + "\n".join(identity_parts))
 
@@ -67,6 +73,36 @@ def get_brand_context_for_prompt(profile: dict) -> str:
         sections.append(
             "## Piliers de contenu (sujets principaux)\n"
             + "\n".join(f"- {p}" for p in profile["content_pillars"])
+        )
+
+    # Différenciateurs clés
+    if profile.get("key_differentiators"):
+        sections.append(
+            "## Messages différenciateurs clés\n"
+            + "\n".join(f"- {d}" for d in profile["key_differentiators"])
+        )
+
+    # Statistiques crédibilité
+    stats = profile.get("key_stats", {})
+    if stats:
+        stats_lines = []
+        if stats.get("deployment_time"):
+            stats_lines.append(f"Déploiement : {stats['deployment_time']}")
+        if stats.get("time_saved_weekly"):
+            stats_lines.append(f"Temps sauvé : {stats['time_saved_weekly']} ({stats.get('time_saved_yearly', '')} / an)")
+        if stats.get("annual_savings"):
+            stats_lines.append(f"Économies estimées : {stats['annual_savings']} / an")
+        if stats_lines:
+            sections.append("## Chiffres de crédibilité (à utiliser dans les posts)\n" + "\n".join(stats_lines))
+
+    # Méthode de travail
+    method = profile.get("method", {})
+    if method.get("steps"):
+        steps_str = "\n".join(f"- {s}" for s in method["steps"])
+        key_msg = method.get("key_message", "")
+        sections.append(
+            f"## Méthode Synchro (4 étapes)\n{steps_str}"
+            + (f"\nMessage clé : {key_msg}" if key_msg else "")
         )
 
     # Style rédactionnel
