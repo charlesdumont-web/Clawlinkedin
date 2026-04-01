@@ -1,13 +1,14 @@
 """
 Définition des outils disponibles pour l'agent Claude.
-Ces outils permettent à Claude d'interagir avec LinkedIn et le planificateur.
+Ces outils permettent à Claude d'interagir avec LinkedIn, le planificateur,
+le profil de marque et la recherche de sujets.
 """
 import json
 import os
 from datetime import datetime, timedelta
 from typing import Any
 
-from . import content_generator, linkedin_client, scheduler
+from . import content_generator, linkedin_client, scheduler, brand_manager, topic_researcher
 
 # Définitions des outils pour l'API Claude
 TOOLS = [
@@ -146,6 +147,84 @@ TOOLS = [
             "required": ["post_id"]
         }
     },
+    {
+        "name": "setup_brand_profile",
+        "description": """Lance l'assistant de configuration du profil de marque et de style.
+        Permet de définir l'identité professionnelle, le style rédactionnel, les valeurs,
+        les piliers de contenu, les hashtags, et des exemples de posts de référence.
+        À utiliser quand l'utilisateur veut personnaliser le style des posts ou configurer sa marque.""",
+        "input_schema": {
+            "type": "object",
+            "properties": {}
+        }
+    },
+    {
+        "name": "get_brand_profile",
+        "description": """Affiche le profil de marque et style actuel de l'utilisateur.
+        Montre toutes les informations configurées : identité, style, valeurs, hashtags, etc.""",
+        "input_schema": {
+            "type": "object",
+            "properties": {}
+        }
+    },
+    {
+        "name": "update_brand_field",
+        "description": """Met à jour un champ spécifique du profil de marque sans relancer tout l'assistant.
+        Utile pour des modifications rapides comme changer les hashtags ou le ton.""",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "field_path": {
+                    "type": "string",
+                    "description": "Chemin du champ à modifier. Ex: 'name', 'style.tone', 'hashtags', 'content_pillars', 'tagline'"
+                },
+                "value": {
+                    "description": "Nouvelle valeur (string, liste, ou objet selon le champ)"
+                }
+            },
+            "required": ["field_path", "value"]
+        }
+    },
+    {
+        "name": "research_trending_topics",
+        "description": """Recherche sur internet les sujets tendance dans un secteur pour trouver des idées de posts LinkedIn.
+        Utilise la recherche web pour identifier les débats du moment, actualités récentes,
+        et sujets qui génèrent de l'engagement dans le domaine de l'utilisateur.
+        Retourne une liste d'idées de posts avec accroches et hashtags suggérés.""",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "industry": {
+                    "type": "string",
+                    "description": "Secteur ou domaine à explorer (ex: 'intelligence artificielle', 'ressources humaines', 'entrepreneuriat')"
+                },
+                "count": {
+                    "type": "integer",
+                    "minimum": 3,
+                    "maximum": 20,
+                    "description": "Nombre d'idées à générer (défaut: 8)"
+                }
+            },
+            "required": ["industry"]
+        }
+    },
+    {
+        "name": "research_news_for_posts",
+        "description": """Recherche les actualités récentes autour de mots-clés spécifiques et propose
+        comment les transformer en posts LinkedIn engageants avec un angle personnel.
+        Parfait pour réagir à l'actualité de son secteur.""",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "keywords": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "description": "Mots-clés à rechercher (ex: ['ChatGPT', 'emploi', 'IA générative'])"
+                }
+            },
+            "required": ["keywords"]
+        }
+    },
 ]
 
 
@@ -242,6 +321,69 @@ def execute_tool(tool_name: str, tool_input: dict, linkedin_tokens: dict | None 
             "success": success,
             "message": f"Post {tool_input['post_id']} annulé." if success
                       else f"Post {tool_input['post_id']} introuvable ou déjà publié.",
+        }
+
+    elif tool_name == "setup_brand_profile":
+        profile = brand_manager.run_setup_wizard()
+        return {
+            "success": True,
+            "message": "Profil de marque configuré avec succès.",
+            "summary": {
+                "name": profile.get("name"),
+                "role": profile.get("role"),
+                "content_pillars": profile.get("content_pillars", []),
+                "style_tone": profile.get("style", {}).get("tone"),
+                "hashtags": profile.get("hashtags", []),
+                "examples_count": len(profile.get("post_examples", [])),
+            },
+        }
+
+    elif tool_name == "get_brand_profile":
+        profile = brand_manager.load_brand_profile()
+        brand_manager.display_brand_profile(profile)
+        return {
+            "success": True,
+            "profile": profile,
+            "configured": bool(profile),
+        }
+
+    elif tool_name == "update_brand_field":
+        updated = brand_manager.update_field(
+            field_path=tool_input["field_path"],
+            value=tool_input["value"],
+        )
+        return {
+            "success": True,
+            "message": f"Champ '{tool_input['field_path']}' mis à jour.",
+            "new_value": updated.get(tool_input["field_path"].split(".")[0]),
+        }
+
+    elif tool_name == "research_trending_topics":
+        profile = brand_manager.load_brand_profile()
+        language = os.getenv("POST_LANGUAGE", "fr")
+        topics = topic_researcher.research_trending_topics(
+            industry=tool_input["industry"],
+            content_pillars=profile.get("content_pillars"),
+            count=tool_input.get("count", 8),
+            language=language,
+        )
+        return {
+            "success": True,
+            "count": len(topics),
+            "topics": topics,
+            "message": f"{len(topics)} idées de posts trouvées pour '{tool_input['industry']}'",
+        }
+
+    elif tool_name == "research_news_for_posts":
+        language = os.getenv("POST_LANGUAGE", "fr")
+        ideas = topic_researcher.get_content_ideas_from_news(
+            keywords=tool_input["keywords"],
+            language=language,
+        )
+        return {
+            "success": True,
+            "count": len(ideas),
+            "ideas": ideas,
         }
 
     else:

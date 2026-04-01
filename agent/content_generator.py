@@ -1,6 +1,7 @@
 """
 Génération de contenu LinkedIn via Claude Opus 4.6.
 Utilise le streaming pour une expérience interactive.
+Intègre le profil de marque pour un contenu personnalisé.
 """
 import os
 from typing import Optional
@@ -10,6 +11,8 @@ from rich.console import Console
 from rich.live import Live
 from rich.markdown import Markdown
 from rich.panel import Panel
+
+from .brand_manager import get_brand_context_for_prompt, load_brand_profile
 
 console = Console()
 
@@ -63,6 +66,7 @@ def generate_post(
     post_type: str = "insight",
     tone: str = "professionnel et authentique",
     additional_context: str = "",
+    brand_profile: Optional[dict] = None,
 ) -> str:
     """
     Génère un post LinkedIn sur un sujet donné.
@@ -76,6 +80,14 @@ def generate_post(
     Returns:
         Le contenu du post LinkedIn généré
     """
+    # Charger le profil de marque (argument ou depuis le fichier)
+    profile = brand_profile if brand_profile is not None else load_brand_profile()
+    brand_context = get_brand_context_for_prompt(profile)
+
+    # Utiliser le ton du profil si non spécifié
+    if tone == "professionnel et authentique" and profile.get("style", {}).get("tone"):
+        tone = profile["style"]["tone"]
+
     professional_context = os.getenv("PROFESSIONAL_CONTEXT", "professionnel polyvalent")
     language = os.getenv("POST_LANGUAGE", "fr")
     lang_instruction = "en français" if language == "fr" else "in English"
@@ -85,7 +97,7 @@ def generate_post(
     system = SYSTEM_PROMPT.format(
         professional_context=professional_context,
         language=lang_instruction,
-    )
+    ) + brand_context
 
     user_message = f"""Génère un post LinkedIn de type "{post_type}" sur le sujet suivant :
 
@@ -129,6 +141,7 @@ Génère UNIQUEMENT le contenu du post (prêt à copier-coller), sans commentair
 def generate_weekly_plan(
     themes: list[str],
     posts_per_week: int = 3,
+    brand_profile: Optional[dict] = None,
 ) -> list[dict]:
     """
     Génère un plan de contenu pour la semaine.
@@ -140,6 +153,9 @@ def generate_weekly_plan(
     Returns:
         Liste de posts avec leur type et contenu suggéré
     """
+    profile = brand_profile if brand_profile is not None else load_brand_profile()
+    brand_context = get_brand_context_for_prompt(profile)
+
     professional_context = os.getenv("PROFESSIONAL_CONTEXT", "professionnel polyvalent")
     language = os.getenv("POST_LANGUAGE", "fr")
     lang_instruction = "en français" if language == "fr" else "in English"
@@ -149,7 +165,7 @@ def generate_weekly_plan(
     system = SYSTEM_PROMPT.format(
         professional_context=professional_context,
         language=lang_instruction,
-    )
+    ) + brand_context
 
     themes_str = "\n".join(f"- {t}" for t in themes)
     post_types = ["storytelling", "insight", "liste", "conseil", "question", "données"]

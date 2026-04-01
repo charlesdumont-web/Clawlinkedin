@@ -26,7 +26,7 @@ from rich.text import Text
 load_dotenv()
 
 from agent import tools as agent_tools
-from agent import linkedin_client, scheduler
+from agent import linkedin_client, scheduler, brand_manager
 
 console = Console()
 
@@ -35,16 +35,29 @@ Tu aides l'utilisateur à créer, planifier et publier du contenu LinkedIn engag
 
 ## Ton rôle
 - Proposer des idées de posts adaptées au secteur de l'utilisateur
-- Générer des posts LinkedIn de haute qualité via l'outil generate_linkedin_post
+- Générer des posts LinkedIn de haute qualité via generate_linkedin_post
 - Planifier les publications aux meilleures heures via schedule_post
 - Publier directement sur LinkedIn via post_to_linkedin_now
-- Maintenir un rythme régulier de publication (recommandé : 3-5 posts/semaine)
+- Maintenir un rythme régulier (recommandé : 3-5 posts/semaine)
+- Rechercher des sujets tendance via research_trending_topics et research_news_for_posts
+- Configurer et utiliser le profil de marque pour personnaliser le style
+
+## Gestion du profil de marque
+- Si l'utilisateur n'a pas de profil de marque, propose de le configurer avec setup_brand_profile
+- Le profil permet de générer des posts qui sonnent VRAIMENT comme l'utilisateur
+- Tu peux mettre à jour des champs spécifiques avec update_brand_field
+- Affiche le profil avec get_brand_profile quand l'utilisateur veut le voir
+
+## Recherche de sujets
+- Utilise research_trending_topics pour trouver des sujets chauds dans un secteur
+- Utilise research_news_for_posts pour réagir à l'actualité récente
+- Propose toujours des angles originaux, pas juste de partager l'info
 
 ## Comportement
-- Sois proactif : propose des idées de contenu même si l'utilisateur ne les demande pas
+- Sois proactif : propose des idées même si l'utilisateur ne les demande pas
 - Explique tes choix de format et timing
-- Si l'utilisateur n'a pas d'idée, propose 3-5 sujets pertinents basés sur les tendances
-- Encourage la régularité : rappelle l'importance d'un calendrier éditorial cohérent
+- Si l'utilisateur n'a pas d'idée, recherche des sujets tendance dans son secteur
+- Encourage la régularité et le calendrier éditorial
 - Parle toujours en français sauf si l'utilisateur écrit en anglais
 
 ## Meilleures heures de publication LinkedIn (heure française)
@@ -56,8 +69,10 @@ Tu aides l'utilisateur à créer, planifier et publier du contenu LinkedIn engag
 ## Contexte utilisateur
 {professional_context}
 
-Commence par accueillir l'utilisateur chaleureusement et demande sur quoi il veut poster cette semaine
-si aucune instruction n'est donnée.
+Au démarrage :
+1. Vérifie si un profil de marque existe (via get_brand_profile)
+2. Si non → propose de le créer pour personnaliser les posts
+3. Si oui → accueille et demande les sujets de la semaine ou propose de rechercher des tendances
 """
 
 
@@ -122,10 +137,15 @@ def chat_loop(linkedin_tokens: dict | None = None):
     console.print(
         Panel(
             "[bold]Bienvenue dans ton agent LinkedIn ! 🚀[/bold]\n\n"
-            "Je vais t'aider à créer et planifier tes posts LinkedIn.\n"
-            "Tape [cyan]quit[/cyan] ou [cyan]exit[/cyan] pour quitter.\n"
-            "Tape [cyan]posts[/cyan] pour voir ta file de publication.\n"
-            "Tape [cyan]run[/cyan] pour exécuter les posts en attente.",
+            "Je vais t'aider à créer et planifier tes posts LinkedIn.\n\n"
+            "[bold]Commandes disponibles :[/bold]\n"
+            "  [cyan]setup[/cyan]   → Configurer ton profil de marque & style\n"
+            "  [cyan]brand[/cyan]   → Voir ton profil de marque actuel\n"
+            "  [cyan]posts[/cyan]   → Voir la file de publication planifiée\n"
+            "  [cyan]auth[/cyan]    → Se connecter à LinkedIn\n"
+            "  [cyan]run[/cyan]     → Publier les posts en attente\n"
+            "  [cyan]quit[/cyan]    → Quitter\n\n"
+            "[dim]Ou parle directement à l'agent pour générer du contenu ![/dim]",
             border_style="cyan",
         )
     )
@@ -158,6 +178,20 @@ def chat_loop(linkedin_tokens: dict | None = None):
 
         if user_input.lower() == "posts":
             scheduler.display_scheduled_posts()
+            continue
+
+        if user_input.lower() in ("brand", "marque", "style"):
+            profile = brand_manager.load_brand_profile()
+            if profile:
+                brand_manager.display_brand_profile(profile)
+            else:
+                console.print("[yellow]Aucun profil configuré.[/yellow]")
+                if Confirm.ask("Lancer l'assistant de configuration ?", default=True):
+                    brand_manager.run_setup_wizard()
+            continue
+
+        if user_input.lower() == "setup":
+            brand_manager.run_setup_wizard()
             continue
 
         if user_input.lower() == "auth":
