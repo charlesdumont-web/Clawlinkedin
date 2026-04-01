@@ -86,6 +86,8 @@ def get_brand_context_for_prompt(profile: dict) -> str:
         if style.get("uses_personal_stories") is not None:
             val = "Oui" if style["uses_personal_stories"] else "Non"
             style_lines.append(f"Partage d'histoires personnelles : {val}")
+        if style.get("special_formatting"):
+            style_lines.append(f"Mise en forme spéciale : {style['special_formatting']}")
         if style_lines:
             sections.append("## Style rédactionnel\n" + "\n".join(style_lines))
 
@@ -103,6 +105,8 @@ def get_brand_context_for_prompt(profile: dict) -> str:
             sig_lines.append(f"Vocabulaire à utiliser : {', '.join(signature['vocabulary_to_use'])}")
         if signature.get("vocabulary_to_avoid"):
             sig_lines.append(f"Vocabulaire à éviter : {', '.join(signature['vocabulary_to_avoid'])}")
+        if signature.get("structural_pattern"):
+            sig_lines.append(f"Schéma de structure : {signature['structural_pattern']}")
         if sig_lines:
             sections.append("## Éléments de signature\n" + "\n".join(sig_lines))
 

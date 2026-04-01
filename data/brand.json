@@ -1,0 +1,75 @@
+{
+  "name": "",
+  "role": "",
+  "company": "",
+  "tagline": "",
+  "target_audience": "Dirigeants de PME et équipes commerciales qui veulent automatiser avec l'IA sans se brûler",
+  "values": [
+    "pragmatisme",
+    "rigueur",
+    "résultats concrets",
+    "pas de bullshit"
+  ],
+  "content_pillars": [
+    "IA pour les ventes et le CRM",
+    "automatisation des processus",
+    "téléphonie et SMS IA",
+    "erreurs à éviter en déploiement IA",
+    "conformité et bonnes pratiques"
+  ],
+  "style": {
+    "tone": "expert tranchant et direct — pas de fluff, pas de jargon vide",
+    "formality": "informel, tutoiement, français québécois (courriels, gabarits, dépend)",
+    "sentence_style": "phrases ultra-courtes — souvent 1 à 3 mots par ligne, beaucoup d'espaces, structure aérée",
+    "emoji_usage": "aucun emoji",
+    "post_length": "long structuré (600-1500 car.) avec sections numérotées et listes",
+    "uses_personal_stories": false,
+    "special_formatting": "listes à puces •, sous-listes indentées, sections numérotées 1) 2) 3), titres en gras, lignes vides entre chaque idée"
+  },
+  "signature": {
+    "opening_hooks": [
+      "X, ce n'est pas 'Y'.",
+      "X, ce n'est pas Y. C'est Z.",
+      "Avant X : une source de vérité.",
+      "Le problème que tout le monde ignore avec X."
+    ],
+    "cta_phrases": [
+      "Écris 'MOT-CLÉ' en DM. Je t'envoie [la ressource].",
+      "Si tu veux déployer propre en 30 jours, écris-nous.",
+      "Écris-nous si tu veux [bénéfice concret]."
+    ],
+    "vocabulary_to_use": [
+      "courriels",
+      "gabarits",
+      "dépend",
+      "propre",
+      "scaler",
+      "se brûler",
+      "point non négociable",
+      "source de vérité",
+      "takeover",
+      "tagger",
+      "closer",
+      "back-and-forth"
+    ],
+    "vocabulary_to_avoid": [
+      "révolutionnaire",
+      "game-changer",
+      "disruptif",
+      "synergies",
+      "paradigme",
+      "passionné",
+      "je suis ravi de"
+    ],
+    "structural_pattern": "Accroche reframe (2-3 lignes) → liste de constats courts → sections numérotées avec exemples → point non-évident → CTA court"
+  },
+  "hashtags": [],
+  "topics_to_avoid": [
+    "politique",
+    "sujets personnels non liés aux affaires"
+  ],
+  "post_examples": [
+    "Un Téléphoniste IA (+SMS) , ce n'est pas \"un robot qui parle\".\n\nC'est un système de relance.\n\nEt ça touche 3 zones sensibles :\n\nVentes.\nExpérience client.\nConformité.\n\nDonc si c'est mal fait, tu ne \"scales\" pas.\nTu te brûles.\n\n\nVoici ce que ça fait quand c'est bien fait.\n\n1) Ça enlève la friction\n\nLe SMS sert à :\n\nConfirmer.\nQualifier.\nPlanifier.\nRappeler.\n\nPas à \"closer\".\n\nExemples simples :\n\n• \"Tu veux qu'on t'appelle quand?\"\n• \"C'est pour quel montant / quel besoin?\"\n• \"Tu es dispo aujourd'hui ou demain?\"\n\nÇa coupe 80% du back-and-forth.\n\n2) Ça crée de la constance\n\nL'IA ne se fatigue pas.\nElle fait le follow-up.\n\n1er contact.\nRelance 2.\nRelance 3.\nDernier essai.\n\nAvec des délais.\n\n24h.\n48h.\n72h.\n\nEt surtout : des limites.\nSinon ça devient du spam.\n\n3) Ça qualifie avant de passer à un humain\n\nL'objectif n'est pas de remplacer ton équipe.\n\nL'objectif est de lui donner :\n\n• le bon lead\n• au bon moment\n• avec le contexte\n\nQui est la personne.\nPourquoi elle a écrit.\nQu'est-ce qu'elle a répondu.\nQu'est-ce qu'on propose ensuite.\n\n4) Ça doit être \"reprenable\"\n\nLe point non négociable :\nTakeover humain instantané.\n\nSi le prospect dit :\n\n• \"OK, je veux parler à quelqu'un\"\n• \"J'ai une situation spéciale\"\n• \"Je suis fâché\"\n• \"Je ne comprends pas\"\n\nL'IA doit :\n\nS'arrêter.\nTagger.\nTransférer.\nEt documenter.\n\n5) Ça doit laisser une trace\n\nSinon tu n'as pas un système.\nTu as un risque.\n\nCe qu'il faut pouvoir voir dans le CRM :\n\n• tous les SMS\n• tous les appels\n• statut du lead\n• raison du statut\n• prochaine action\n• opt-out / consentement\n\nCe que les gens sous-estiment\nLe plus dur, ce n'est pas la voix.\n\nC'est :\n\nLes règles d'escalade.\nLa déduplication.\nLa gestion des exceptions.\nLa conformité.\nLe monitoring.\n\n\nSi tu veux déployer \"propre\" en 30 jours, écris-nous.\nhttps://lnkd.in/eYsdHjDS",
+    "Avant l'IA : une source de vérité.\n\nSans ça, l'IA n'a rien de fiable à amplifier.\n\nJe vois souvent la même réalité.\n\nPas de CRM.\nOu un CRM \"optionnel\".\n\nDes données dans les courriels.\nDes notes dans des fichiers.\nDes infos dans des drives.\n\nUn suivi qui dépend de la mémoire de deux personnes.\n\nDans ce contexte, l'IA ne règle rien.\nElle amplifie l'incohérence.\n\nLa séquence qui marche.\n\nUn CRM structuré et utilisé.\nDes champs clairs.\nDes étapes claires.\nDes responsabilités claires.\n\nDes automatisations de base.\nRelances.\nRappels.\nTâches.\nGabarits.\n\nPuis l'IA intégrée.\nRésumés d'appels.\nBrouillons de courriels.\nAnalyse de données.\nPriorisation.\n\nL'IA n'est pas le point de départ.\nC'est l'accélérateur.\n\nÉcris \"VÉRITÉ\" en DM.\nJe t'envoie la checklist qu'on utilise avant d'implanter l'IA."
+  ]
+}
